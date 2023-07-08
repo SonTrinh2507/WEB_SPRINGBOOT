@@ -1,0 +1,134 @@
+
+    *{
+        box-sizing: border-box;
+    }
+    p{
+        font-size: 15px;
+    }
+#detail{
+    width: 480px;
+    height: 550px;
+    padding: 10px;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 5% 35%;
+    box-shadow: 0 8px 32px hsla(0, 0%, 43%, 0.466);
+    border-radius: 20px;
+    display: none;
+    background-color: white;
+
+}
+#detail .content{
+    width: 100%;
+    height: 100%;
+    /* border: 1px solid black; */
+}
+.content .title{
+    border-bottom: 2px solid black;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+.content .title .close{
+    font-size: 25px;
+    padding: 0;
+}
+.content .title .close:hover  {
+    color: orange;
+    cursor: pointer;
+}
+.content #listAddres #list-info{
+    /* border: 1px solid black; */
+    position: relative;
+    max-height: 348px;
+    overflow-y: hidden;
+}
+.content #listAddres #list-info .item{
+    border: 2px solid rgb(136, 130, 130);    
+    border-radius: 10px;
+    margin: 12px;
+    padding: 7px;
+    display: flex;
+    height: 100px;
+    justify-content: space-between;
+}
+.content #listAddres #list-info .item div{
+    width: 400px;
+    /* border: 1px solid black; */
+    padding: 0 10px;
+    overflow-y: auto;
+}
+.content #listAddres #list-info .item input{
+    margin-right: 5px;
+}
+.content #listAddres #list-info .item i{
+    border-radius: 15px;
+    border: 1px solid black;
+    height: fit-content;
+    width: fit-content;
+    padding: 5px;
+}
+.content #listAddres #list-info .item i:hover{
+    background-color: rgba(143, 143, 143, 0.39);
+}
+.content .btn-address{
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin-bottom: 20px;
+}
+.content .btn-address a{
+    border: 1px solid black;
+    padding: 10px 30px;
+    margin: 10px 40px;
+    border-radius: 15px;
+    font-weight: bold;
+    color: black;
+}
+.content .btn-address a:hover{
+    background-color: gray;
+}
+.content #add{
+    /* height: 100%;
+    width: 100%;
+    border: 1px solid black;
+    border-radius: 0;
+    padding: 10px; */
+    display: none;
+}
+.content .form .form-input{
+    box-shadow: none;
+    margin-top: 10px;
+}
+.content .form .form-input li{
+    margin-bottom: 20px;
+}
+.content #add .div-ldc{
+    position: relative;
+    width: 100%;
+    height: 70px;
+    margin: 10px
+}
+.content #add .div-ldc h4{
+    margin-bottom: 15px;
+}
+.content #add .div-ldc a{
+    border: 1px solid black;
+    padding: 7px;
+    margin-top: 10px;
+    font-weight: bold;
+    color: black;
+    border-radius: 5px;
+}
+.content #add .title .back{
+    font-size: 20px;
+}
+.content #add .title .back:hover{
+    color: orange;
+    cursor: pointer;
+}
