@@ -28,4 +28,15 @@ public class ChapterServiceImpl implements ChapterService {
 	public Chapter contentChapter(Long story_id, String slug) {
 		return chapterRepo.contentChapter(story_id, slug);
 	}
+	
+	@Override
+	public 	int countChapter(Long story_id) {
+		return chapterRepo.countChapter(story_id);
+	}
+	
+	@Override 
+	public <S extends Chapter> S save(S entity) {
+		return chapterRepo.save(entity);
+	}
+
 }

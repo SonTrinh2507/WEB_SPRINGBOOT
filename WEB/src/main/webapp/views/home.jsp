@@ -103,25 +103,17 @@
 						</form>
 					</div></li>
 			</ul>
-			<form class="navbar-form navbar-right"
-				action="https://truyenfull.vn/tim-kiem/" role="search"
-				itemprop="potentialAction" itemscope
-				itemtype="https://schema.org/SearchAction">
-				<div class="input-group search-holder">
-					<meta itemprop="target"
-						content="https://truyenfull.vn/tim-kiem/?tukhoa={tukhoa}" />
-					<input aria-label="Từ khóa tìm kiếm" role="search key"
-						class="form-control" id="search-input" type="search" name="tukhoa"
-						placeholder="Tìm kiếm..." value="" itemprop="query-input" required>
-					<div class="input-group-btn">
-						<button class="btn btn-default" type="submit"
-							aria-label="Tìm kiếm" role="search">
-							<span class="glyphicon glyphicon-search"></span>
-						</button>
-					</div>
-				</div>
-				<div class="list-group list-search-res hide"></div>
-			</form>
+			<form class="navbar-form navbar-right" action="/search" method="GET">
+    <div class="input-group search-holder">
+        <input aria-label="Từ khóa tìm kiếm" role="search key" class="form-control" id="search-input" type="search" name="keyword" placeholder="Tìm kiếm..." required>
+        <div class="input-group-btn">
+            <button class="btn btn-default" type="submit" aria-label="Tìm kiếm" role="search">
+                <span class="glyphicon glyphicon-search"></span>
+            </button>
+        </div>
+    </div>
+    <div class="list-group list-search-res hide"></div>
+</form>
 		</div>
 	</div>
 	<div class="navbar-breadcrumb">
@@ -260,11 +252,10 @@
 					<a><span
 						class="glyphicon glyphicon-menu-right"></span></a>
 				</div>
+				<c:forEach var = "complete" items = "${storiesComplete }">
 				<div class="row">
-					<c:forEach var = "complete" items = "${storiesComplete }">
-					<div class="col-xs-4 col-sm-3 col-md-2">
-					<c:forEach var = "item" items = "${complete.getChapter() }">
-						
+					
+					<div class="col-xs-4 col-sm-3 col-md-2">				
 						<a
 							href="/${complete.story_code }/${complete.slug}"
 							title="${complete.story_name}">
@@ -277,9 +268,9 @@
 								<small class="btn-xs label-primary">Full - ${complete.total_chapter} chương</small>
 							</div>
 						</a>
-						</c:forEach>
+					
 					</div>
-					</c:forEach>
+						</c:forEach>
 				</div>
 			</div>
 		</div>
@@ -314,28 +305,8 @@
 		</div>
 	</div>
 	<script src="/assets/js/home.js"></script>
-<script>
-function sendParameters(start, end) {
-  var form = document.createElement("form");
-  form.setAttribute("method", "GET");
-  form.setAttribute("action", "/top-chapter");
+<script src="/assets/js/function.js"></script>
 
-  var startInput = document.createElement("input");
-  startInput.setAttribute("type", "hidden");
-  startInput.setAttribute("name", "start");
-  startInput.setAttribute("value", start);
-  form.appendChild(startInput);
-
-  var endInput = document.createElement("input");
-  endInput.setAttribute("type", "hidden");
-  endInput.setAttribute("name", "end");
-  endInput.setAttribute("value", end);
-  form.appendChild(endInput);
-
-  document.body.appendChild(form);
-  form.submit();
-}
-</script>
 
 </body>
 </html>

@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.microsoft.sqlserver.jdbc.StringUtils;
@@ -47,4 +49,13 @@ public class StoriesServiceImpl implements StoriesService {
 		return storiesRepo.listStoriesComplete();
 	}
 	
+	@Override
+	public List<Stories> findByStoryNameContainingIgnoreCase(String keyword){
+		return storiesRepo.findByStoryNameContainingIgnoreCase(keyword);
+	}
+	
+	@Override
+	public 	Page<Stories> listStoriesincomplete(Pageable pageable){
+		return storiesRepo.listStoriesincomplete(pageable);
+	}
 }

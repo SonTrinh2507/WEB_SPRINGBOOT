@@ -12,9 +12,10 @@
 	content="width=device-width,minimum-scale=1,initial-scale=1">
 <link rel="stylesheet" href="/assets/css/category.css">
 	<script src="/assets/js/category.js"></script>
+
 </head>
 <body id="body_cat">
-	<div id="ads-install-app"></div>
+	
 	<div id="wrap">
 		<div class="navbar navbar-default navbar-static-top" role="navigation"
 	id="nav">
@@ -74,17 +75,11 @@
 						class="glyphicon glyphicon-list"></span> Phân loại theo Chương <span
 						class="caret"></span></a>
 					<ul class="dropdown-menu" role="menu">
-						<li><a onclick="sendParameters(0, 100)"						
-							title="Dưới 100 chương">Dưới 100 chương</a></li>
-						<li><a
-							href="https://truyenfull.vn/top-truyen/100-500-chuong/"
-							title="100 - 500 chương">100 - 500 chương</a></li>
-						<li><a
-							href="https://truyenfull.vn/top-truyen/500-1000-chuong/"
-							title="500 - 1000 chương">500 - 1000 chương</a></li>
-						<li><a
-							href="https://truyenfull.vn/top-truyen/tren-1000-chuong/"
-							title="Trên 1000 chương">Trên 1000 chương</a></li>
+					  <li><a href="#" onclick="sendParameters(0, 100)">Dưới 100 chương</a></li>
+					  <li><a href="#" onclick="sendParameters(100, 500)">100 - 500 chương</a></li>
+					  <li><a href="#" onclick="sendParameters(500, 1000)">500 - 1000 chương</a></li>
+					  <li><a href="#" onclick="sendParameters(1000, -1)">Trên 1000 chương</a></li>
+
 					</ul></li>
 
 				<li class="dropdown"><a href="javascript:void(0)"
@@ -132,8 +127,8 @@
 			liên tục.</div>
 	</div>
 </div>
-		<div class="container header-ads" id="header-ads"></div>
-		<div class="header-ads-full" id="header-ads-full"></div>
+		
+		
 		<div class="container" id="list-page">
 			<div class="col-xs-12 col-sm-12 col-md-9 col-truyen-main">
 				<div class="text-center"></div>
@@ -144,32 +139,28 @@
 					<c:forEach var = "item" items = "${stories }">
 					<div class="row" itemscope itemtype="https://schema.org/Book">
 						
-						<div class="col-xs-3">
+						<div class="col-xs-3" style="width: 182px; height: 82px;">
 							<div>
-								<div
-									data-image="/assets/img/anh-sach-800x451.jpg"
-									data-desk-image="/assets/img/${item.getStories().getStory_picture() }"
-									data-classname="cover" data-alt="${item.getStories().getStory_name() }"
-									class="lazyimg"></div>
+								<img src="/assets/img/${item.getStories().getStory_picture()}" class="cover" style="width: 100%; height: 82px; object-fit: cover;"></img>
 							</div>
 						</div>
 						<div class="col-xs-7">
 							<div>
 								<span class="glyphicon glyphicon-book"></span>
 								<h3 class="truyen-title" itemprop="name">
-									<a href="https://truyenfull.vn/ta-la-con-roi-vo-dich/"
+									<a href="/${item.getStories().getStory_code() }/${item.getStories().getSlug() }"
 										title="${item.getStories().getStory_name() }" itemprop="url">${item.getStories().getStory_name() }</a>
 								</h3>
 								<span class="label-title label-new"></span><span class="author"
 									itemprop="author"><span
-									class="glyphicon glyphicon-pencil"></span>${item.getStories().getAuthor().getAuthor_name() }</span>
+									class="glyphicon glyphicon-pencil"></span>${item.getStories().getAuthor_name()}</span>
 							</div>
 						</div>
 						<div class="col-xs-2 text-info">
 						
 							<div>
-								<a href="https://truyenfull.vn/ta-la-con-roi-vo-dich/chuong-46/"
-									title="Ta Là Con Rối Vô Địch - Chương 46">
+								<a href="/detail-story/${item.getStories().getStory_code() }/${item.getStories().getSlug() }/chuong-${item.getStories().getTotal_chapter()}"
+									title="${item.getStories().getStory_name() }">
 									<span
 									class="chapter-text"><span>Chương </span></span>${item.getStories().getTotal_chapter()}</a>
 							</div>
@@ -179,48 +170,44 @@
 					</c:forEach>
 				</div>
 				<div class="text-center pagination-container">
-					<ul class="pagination pagination-sm">
-						<li class="active"><span>1<span class="sr-only">
-									(đang xem)</span></span></li>
-						<li><a
-							href="https://truyenfull.vn/the-loai/tien-hiep/trang-2/"
-							title="Tiên Hiệp - Trang 2">2</a></li>
-						<li><a
-							href="https://truyenfull.vn/the-loai/tien-hiep/trang-3/"
-							title="Tiên Hiệp - Trang 3">3</a></li>
-						<li><a
-							href="https://truyenfull.vn/the-loai/tien-hiep/trang-4/"
-							title="Tiên Hiệp - Trang 4">4</a></li>
-						<li><a
-							href="https://truyenfull.vn/the-loai/tien-hiep/trang-6/"
-							title="Tiên Hiệp - Trang 6">6</a></li>
-						<li><a
-							href="https://truyenfull.vn/the-loai/tien-hiep/trang-11/"
-							title="Tiên Hiệp - Trang 11">11</a></li>
-						<li><a
-							href="https://truyenfull.vn/the-loai/tien-hiep/trang-2/"
-							title="Tiên Hiệp - Trang 2"><span class="sr-only">Trang
-									tiếp</span><span class="glyphicon glyphicon-menu-right"></span></a></li>
-						<li><a
-							href="https://truyenfull.vn/the-loai/tien-hiep/trang-42/"
-							title="Tiên Hiệp - Trang 42">Cuối <span class="arrow">&raquo;</span></a></li>
-						<li class="dropup page-nav"><a href="javascript:void(0)"
-							data-toggle="dropdown">Chọn trang <span class="caret"></span></a>
-						<div class="dropdown-menu dropdown-menu-right" role="menu">
-								<form action="." name="page_jump" id="page_jump" method="get">
-									<div class="input-group">
-										<input name="page_type" type="hidden" value="the-loai"><input
-											name="truyen" type="hidden" value="tien-hiep"><input
-											name="filter" type="hidden" value=""><input
-											class="form-control" name="page" type="number"
-											placeholder="Số trang..." value=""><span
-											class="input-group-btn"><button
-												class="btn btn-default" type="submit">Đi</button></span>
-									</div>
-								</form>
-							</div></li>
-					</ul>
-				</div>
+  <ul class="pagination pagination-sm">
+    <c:if test="${totalPages > 1}">
+      <c:set var="maxPages" value="5" /> <!-- Số trang tối đa hiển thị -->
+      <c:set var="startPage" value="${currentPage - maxPages / 2}" /> <!-- Trang bắt đầu hiển thị -->
+      <c:set var="endPage" value="${currentPage + maxPages / 2}" /> <!-- Trang kết thúc hiển thị -->
+
+      <!-- Giới hạn trang bắt đầu và kết thúc -->
+      <c:if test="${startPage < 1}">
+        <c:set var="startPage" value="1" />
+      </c:if>
+      <c:if test="${endPage > totalPages}">
+        <c:set var="endPage" value="${totalPages}" />
+      </c:if>
+
+      <!-- Nút trang trước -->
+      <c:if test="${currentPage > 1}">
+        <li><a href="/${category_id}/${slug}?page=${currentPage - 1}">&laquo;</a></li>
+      </c:if>
+
+      <!-- Các nút trang -->
+      <c:forEach var="page" begin="${startPage}" end="${endPage}">
+        <c:choose>
+          <c:when test="${page == currentPage}">
+            <li class="active"><span>${page}<span class="sr-only">(đang xem)</span></span></li>
+          </c:when>
+          <c:otherwise>
+            <li><a href="/${category_id}/${slug}?page=${page}">${page}</a></li>
+          </c:otherwise>
+        </c:choose>
+      </c:forEach>
+
+      <!-- Nút trang tiếp theo -->
+      <c:if test="${currentPage < totalPages}">
+        <li><a href="/${category_id}/${slug}?page=${currentPage + 1}">&raquo;</a></li>
+      </c:if>
+    </c:if>
+  </ul>
+</div>
 			</div>
 			<div class="col-xs-12 col-sm-12 col-md-3 col-truyen-side">
 				<div class="visible-md-block visible-lg-block text-center">
@@ -237,58 +224,12 @@
 							</div>
 							</c:forEach>
 						</div>
-					</div>
-					<div class="ads-300-600 list-truyen list-cat col-xs-12"
-						style="padding-left: 0; padding-right: 0"
-						id="the-loai-right-banner"></div>
-					<div class="list list-truyen list-side col-xs-12">
-						<div class="title-list">
-							<h4>Truyện Tiên Hiệp Đang Hot</h4>
-						</div>
-						<div class="row top-nav" data-limit="10" data-cat="1">
-							<div class="col-xs-4 active" data-type="day">Ngày</div>
-							<div class="col-xs-4" data-type="month">Tháng</div>
-							<div class="col-xs-4" data-type="all">All time</div>
-						</div>					
-						<div class="row top-item">
-							<div class="col-xs-12">
-								<div class="top-num top-10">10</div>
-								<div class="s-title">
-									<h3>
-										<a href="https://truyenfull.vn/nguyen-ton/" title="Nguyên Tôn">Nguyên
-											Tôn</a>
-									</h3>
-								</div>
-								<div>
-									<a itemprop="genre"
-										href="https://truyenfull.vn/the-loai/tien-hiep/"
-										title="Tiên Hiệp">Tiên Hiệp</a>, <a itemprop="genre"
-										href="https://truyenfull.vn/the-loai/huyen-huyen/"
-										title="Huyền Huyễn">Huyền Huyễn</a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="ads-300-600 list-truyen list-cat col-xs-12"
-						style="padding-left: 0; padding-right: 0"
-						id="the-loai-right-banner-bottom"></div>
+					</div>						
 				</div>
-				<div id="ads-cate-list-1" class="ads-cate-sidebar"
-					style="padding: 0 10px;"></div>
+				
 			</div>
-			<div id="banner-bio-link-cate" class="ads-cate-sidebar"
-				style="padding: 0 10px;"></div>
-		</div>
-		<div class="container text-center pagination-container">
-			<div class="row ads-chapter-bottom-lien-quan" id="is_show_slide"
-				style="padding-left: 5px; padding-right: 5px">
-				<div class="ads-lien-quan" id="ads-lien-quan-1"></div>
-				<div class="ads-lien-quan" id="ads-lien-quan-2"></div>
-				<div class="ads-lien-quan" id="ads-lien-quan-3"></div>
-				<div class="ads-lien-quan" id="ads-lien-quan-4"></div>
-				<div class="ads-lien-quan" id="ads-lien-quan-6"></div>
-			</div>
-		</div>
+			
+	
 	</div>
 	<div id="footer" class="footer">
 		<div class="container">
@@ -343,6 +284,7 @@
 			</div>
 		</div>
 	</div>
-	
+	<script src="/assets/js/function.js"></script>
+
 </body>
 </html>

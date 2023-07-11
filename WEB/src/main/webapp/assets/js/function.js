@@ -34,9 +34,9 @@ function toggleChapterSelect() {
  //choose chappter before
  var chapterSelect = document.getElementById('chapterSelect');
   var storedChapter = localStorage.getItem('selectedChapter');
-  
+   
   // Khôi phục tùy chọn trước đó nếu có
-  if (storedChapter) {
+  if (storedChapter ) {
     var index = Array.from(chapterSelect.options).findIndex(function(option) {
       return option.value === storedChapter;
     });
@@ -49,7 +49,7 @@ function toggleChapterSelect() {
     var selectedOption = chapterSelect.options[chapterSelect.selectedIndex];
     var link = selectedOption.value;
     
-    if (link !== '') {
+    if (link !== '' ) {
       // Lưu tùy chọn được chọn vào Local Storage
       localStorage.setItem('selectedChapter', link);
       window.location.href = link;
@@ -58,12 +58,11 @@ function toggleChapterSelect() {
   
    //choose chappter after
    var chapterSelect1 = document.getElementById('chapterSelect1');
-  var storedChapter1 = localStorage.getItem('selectedChapter1');
-  
+
   // Khôi phục tùy chọn trước đó nếu có
-  if (storedChapter1) {
+  if (storedChapter) {
     var index = Array.from(chapterSelect1.options).findIndex(function(option) {
-      return option.value === storedChapter1;
+      return option.value === storedChapter;
     });
     if (index !== -1) {
       chapterSelect1.selectedIndex = index;
@@ -74,13 +73,38 @@ function toggleChapterSelect() {
     var selectedOption = chapterSelect1.options[chapterSelect1.selectedIndex];
     var link = selectedOption.value;
     
-    if (link !== '') {
+    if (link !== '' ) {
       // Lưu tùy chọn được chọn vào Local Storage
-      localStorage.setItem('selectedChapter1', link);
+      localStorage.setItem('selectedChapter', link);
       window.location.href = link;
     }
   };
   
-  
+  function updateSelectedOption(element) {
+    var link = element.getAttribute("href");
+
+    if (link !== '') {
+      var selectElement = document.getElementById("chapterSelect");
+      for (var i = 0; i < selectElement.options.length; i++) {
+        if (selectElement.options[i].value === link) {
+          selectElement.options[i].selected = true;
+          break;
+        }
+      }
+
+      localStorage.setItem("selectedChapter", link);
+    }
+  }
+
+  // Đặt lại giá trị option từ localStorage khi trang được tải
+  if (storedChapter) {
+    var selectElement = document.getElementById("chapterSelect");
+    for (var i = 0; i < selectElement.options.length; i++) {
+      if (selectElement.options[i].value === savedOption) {
+        selectElement.options[i].selected = true;
+        break;
+      }
+    }
+  }
   
   

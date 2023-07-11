@@ -15,6 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -47,6 +49,7 @@ public class Stories implements Serializable{
 	@Column
 	private String status;
 	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column
 	private Date story_datepost;
 	
@@ -67,14 +70,10 @@ public class Stories implements Serializable{
 	private float agv_star;
 		
 	@Column
-	private Long author_id;
+	private String author_name;
 	
 	@OneToMany(mappedBy = "stories", fetch = FetchType.LAZY)
 	private List<Category_Story> category_story;
-	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "author_id", insertable = false, updatable = false)
-	private  Author author;
 	
 	@OneToMany(mappedBy = "stories", fetch = FetchType.EAGER)
 	private List<Chapter> chapter;

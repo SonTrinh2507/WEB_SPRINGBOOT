@@ -13,6 +13,14 @@
 
 
 <link rel="stylesheet" href="/assets/css/home.css">
+<style>
+
+    .top-num.top-10 {
+        background-color: #FFDAB9;
+    }
+
+
+</style>
 </head>
 <body id="body_truyen">
 	<div id="ads-install-app"></div>
@@ -38,12 +46,13 @@
 						<span class="sr-only">Hiện menu</span><span class="icon-bar"></span><span
 							class="icon-bar"></span><span class="icon-bar"></span>
 					</button>
-					<a class="header-logo" href="https://truyenfull.vn/"
+					<a class="header-logo" href="/home"
 						title="doc truyen">doc truyen</a>
 				</div>
 				<div class="navbar-collapse collapse">
 					<ul class="control nav navbar-nav ">
-						<li class="dropdown"><a href="javascript:void(0)"
+
+				<li class="dropdown"><a href="javascript:void(0)"
 					class="dropdown-toggle" data-toggle="dropdown"><span
 						class="glyphicon glyphicon-list"></span> Thể loại <span
 						class="caret"></span></a>
@@ -59,53 +68,43 @@
 								<ul class="dropdown-menu">
 									</c:if>
 									<li><a
-										href="http://localhost:8888/category/${item.slug}"
+										href="/category/${item.category_id }/${item.slug}"
 										title="Truyện Tiên Hiệp">${item.category_name}</a></li>
 									</c:forEach>
 								</ul>
 							</div>
 						</div>
 					</div></li>
-						<li class="dropdown"><a href="javascript:void(0)"
-							class="dropdown-toggle" data-toggle="dropdown"><span
-								class="glyphicon glyphicon-list"></span> Phân loại theo Chương <span
-								class="caret"></span></a>
-							<ul class="dropdown-menu" role="menu">
-								<li><a
-									href="https://truyenfull.vn/top-truyen/duoi-100-chuong/"
-									title="Dưới 100 chương">Dưới 100 chương</a></li>
-								<li><a
-									href="https://truyenfull.vn/top-truyen/100-500-chuong/"
-									title="100 - 500 chương">100 - 500 chương</a></li>
-								<li><a
-									href="https://truyenfull.vn/top-truyen/500-1000-chuong/"
-									title="500 - 1000 chương">500 - 1000 chương</a></li>
-								<li><a
-									href="https://truyenfull.vn/top-truyen/tren-1000-chuong/"
-									title="Trên 1000 chương">Trên 1000 chương</a></li>
-							</ul></li>
-						<li class="dropdown"><a href="https://nettruyenfull.com/"
-							rel="nofollow" target="_blank" title="Truyện tranh"><span
-								class="glyphicon glyphicon-book" style="margin-right: 3px;"></span>Truyện
-								Tranh</a></li>
-						<li class="dropdown"><a href="javascript:void(0)"
-							class="dropdown-toggle" data-toggle="dropdown"><span
-								class="glyphicon glyphicon-cog"></span> Tùy chỉnh <span
-								class="caret"></span></a>
-							<div class="dropdown-menu dropdown-menu-right settings">
-								<form class="form-horizontal">
-									<div class="form-group form-group-sm">
-										<label class="col-sm-2 col-md-5 control-label"
-											for="truyen-background">Màu nền</label>
-										<div class="col-sm-5 col-md-7">
-											<select class="form-control" id="truyen-background"><option
-													value="#F4F4F4" selected>Xám nhạt</option>
-												<option value="#232323">Màu tối</option></select>
-										</div>
-									</div>
-								</form>
-							</div></li>
-					</ul>
+				<li class="dropdown"><a href="javascript:void(0)"
+					class="dropdown-toggle" data-toggle="dropdown"><span
+						class="glyphicon glyphicon-list"></span> Phân loại theo Chương <span
+						class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu">
+					  <li><a href="#" onclick="sendParameters(0, 100)">Dưới 100 chương</a></li>
+					  <li><a href="#" onclick="sendParameters(100, 500)">100 - 500 chương</a></li>
+					  <li><a href="#" onclick="sendParameters(500, 1000)">500 - 1000 chương</a></li>
+					  <li><a href="#" onclick="sendParameters(1000, -1)">Trên 1000 chương</a></li>
+
+					</ul></li>
+
+				<li class="dropdown"><a href="javascript:void(0)"
+					class="dropdown-toggle" data-toggle="dropdown"><span
+						class="glyphicon glyphicon-cog"></span> Tùy chỉnh <span
+						class="caret"></span></a>
+					<div class="dropdown-menu dropdown-menu-right settings">
+						<form class="form-horizontal">
+							<div class="form-group form-group-sm">
+								<label class="col-sm-2 col-md-5 control-label"
+									for="truyen-background">Màu nền</label>
+								<div class="col-sm-5 col-md-7">
+									<select class="form-control" id="truyen-background"><option
+											value="#F4F4F4" selected>Xám nhạt</option>
+										<option value="#232323">Màu tối</option></select>
+								</div>
+							</div>
+						</form>
+					</div></li>
+			</ul>
 					<form class="navbar-form navbar-right"
 						action="https://truyenfull.vn/tim-kiem/" role="search">
 						<div class="input-group search-holder">
@@ -131,12 +130,12 @@
 							itemtype="https://schema.org/ListItem"><a
 							href="https://truyenfull.vn" accesskey="1"><span
 								class="glyphicon glyphicon-home"></span></a><a
-							href="https://truyenfull.vn" title="Đọc truyện online"
+							href="/home" title="Đọc truyện online"
 							itemprop="item"><span itemprop="name">Truyện</span></a>
 						<meta itemprop="position" content="1" /></li>
 						<li class="active" itemprop="itemListElement" itemscope
 							itemtype="https://schema.org/ListItem"><h1>
-								<a href="https://truyenfull.vn/kieu-sung-vi-thuong/"
+								<a href="/${story.story_code}/${story.slug}"
 									title="${story.story_name }" itemprop="item"><span
 									itemprop="name">${story.story_name }</span></a>
 							</h1>
@@ -167,8 +166,7 @@
 							<div>
 								<h3>Tác giả:</h3>
 								<a itemprop="author"
-									href="https://truyenfull.vn/tac-gia/diep-kien-tinh/"
-									title="${story.getAuthor().getAuthor_name() }">${story.getAuthor().getAuthor_name() }</a>
+									title="${story.getAuthor_name() }">${story.getAuthor_name() }</a>
 							</div>
 							<div>
 										<h3>Thể loại:</h3>
@@ -183,7 +181,7 @@
 							        <c:set var="flag" value="true" />
 							      </c:otherwise>
 							    </c:choose>
-							    <a itemprop="genre" href="/category/${i.getCategory().getSlug()}" title="${i.getCategory().getCategory_name()}">${i.getCategory().getCategory_name()}</a>
+							    <a itemprop="genre" href="/category/${i.getCategory().getCategory_id()}/${i.getCategory().getSlug()}" title="${i.getCategory().getCategory_name()}">${i.getCategory().getCategory_name()}</a>
 							  </c:if>
 							</c:forEach>
 						
@@ -194,9 +192,23 @@
 							</div>
 							<div>
 								<h3>Trạng thái:</h3>
-								<span class="text-success">${story.status }</span>
+							<c:choose>
+							    <c:when test="${story.status == 0}">
+							        <span class="text-success">Chưa ra</span>
+							    </c:when>
+							    <c:when test="${story.status == 1}">
+							        <span class="text-success">Đang ra</span>
+							    </c:when>
+							    <c:when test="${story.status == 2}">
+							        <span class="text-success">Full</span>
+							    </c:when>
+							    <c:otherwise>
+							        <span class="text-success">Trạng thái không xác định</span>
+							    </c:otherwise>
+							</c:choose>							
 							</div>
 						</div>
+						
 					</div>
 					<div class="col-xs-12 col-sm-8 col-md-8 desc">
 						<div class="rate">
@@ -240,7 +252,7 @@
 							<ul class="list-chapter">						
 								<li><span class="glyphicon glyphicon-certificate"></span> <a
 									href="/detail-story/${item.getStories().getStory_code() }/${item.getStories().getSlug()}/${item.slug}"
-									title="Kiều Sủng Vi Thượng - Chương 1: 1: Trùng Sinh"><span
+									title="${story.story_name } - ${item.chapter_name }"><span
 										class="chapter-text"><span>${item.chapter_name } </span></span></a></li>						
 							</ul>
 							</c:forEach>
@@ -254,12 +266,9 @@
 						id="truyen-time" type="hidden" value="1666015271">
 					<ul class="pagination pagination-sm">
 						<li class="active"><span>1<span class="sr-only">
-									(đang xem)</span></span></li>
+									(đang xem)</span></span></li>						
 						<li><a
-							href="https://truyenfull.vn/kieu-sung-vi-thuong/trang-2/#list-chapter"
-							title="Kiều Sủng Vi Thượng - Trang 2">2</a></li>
-						<li><a
-							href="https://truyenfull.vn/kieu-sung-vi-thuong/trang-2/#list-chapter"
+							href="/category/$"
 							title="Kiều Sủng Vi Thượng - Trang 2"><span class="sr-only">Trang
 									tiếp</span><span class="glyphicon glyphicon-menu-right"></span></a></li>
 					</ul>
@@ -283,30 +292,25 @@
 					id="ads-300x250-detail-truyen-top"></div>
 				<div class="list list-truyen list-side col-xs-12">
 					<div class="title-list">
-						<h4>Truyện đang hot</h4>
+						<h4>Truyện cùng thể loại</h4>
 					</div>
-					<div class="row top-nav" data-limit="10">
-						<div class="col-xs-4 active" data-type="day">Ngày</div>
-						<div class="col-xs-4" data-type="month">Tháng</div>
-						<div class="col-xs-4" data-type="all">All time</div>
-					</div>				
+					<c:set var="sum" value="0" />	
+							
 					<div class="row top-item">
+						<c:forEach var = "item" items = "${alikeCategory }">
+						
 						<div class="col-xs-12">
-							<div class="top-num top-10">10</div>
+						<div class="top-num top-10"></div>
+					
+							
 							<div class="s-title">
 								<h3>
-									<a href="https://truyenfull.vn/re-quy-troi-cho-480197/"
-										title="Rể Quý Trời Cho">Rể Quý Trời Cho</a>
+									<a href="/${item.getStories().getStory_code()}/${item.getStories().getSlug() }"
+										title="Rể Quý Trời Cho">${item.getStories().getStory_name() }</a>
 								</h3>
-							</div>
-							<div>
-								<a itemprop="genre"
-									href="https://truyenfull.vn/the-loai/ngon-tinh/"
-									title="Ngôn Tình">Ngôn Tình</a>, <a itemprop="genre"
-									href="https://truyenfull.vn/the-loai/do-thi/" title="Đô Thị">Đô
-									Thị</a>
-							</div>
+							</div>						
 						</div>
+						</c:forEach>
 					</div>
 				</div>
 				<div class="list list-truyen list-side col-xs-12"
@@ -364,5 +368,7 @@
 	</div>
 
 	<script src="/assets/js/home.js"></script>
+	<script src="/assets/js/function.js"></script>
+	
 </body>
 </html>

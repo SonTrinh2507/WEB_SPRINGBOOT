@@ -53,7 +53,7 @@
 								<ul class="dropdown-menu">
 									</c:if>
 									<li><a
-										href="http://localhost:8888/category/${item.slug}"
+										href="/category/${item.slug}"
 										title="Truyện Tiên Hiệp">${item.category_name}</a></li>
 									</c:forEach>
 								</ul>
@@ -151,20 +151,20 @@
 					<h2>
 						<a class="chapter-title"
 							href="/detail-story/${story.story_code}/${story.slug}/${contentChapter.slug}"
-							title="Ta Vì Biểu Thúc Họa Tân Trang - Chương 1: Chương 1:"><span
+							title="${story.story_name } - ${contentChapter.chapter_name}"><span
 							class="chapter-text"><span>${contentChapter.chapter_name} </span></span></a>
 					</h2>
 					<c:set var="chapter" value="${contentChapter.slug}" />
 					<c:set var="fmchapter" value="${fn:substringAfter(chapter, '-')}" />
 					<c:set var="chapterIntBefore" value="0" />
-					<c:set var="chapterInt" value="${Integer.parseInt(fmchapter) + 1}" />
+					<c:set var="chapterInt" value="${Integer.parseInt(fmchapter)}" />
 					
 					<hr class="chapter-start">
 					<div class="chapter-nav" id="chapter-nav-top">
 						<div class="btn-group">
 							<a class="btn btn-success btn-chapter-nav"
-								href="javascript:void(0)" title="Không có chương trước"
-								id="prev_chap" data-cid=""><span
+								href="/detail-story/${story.story_code }/${story.slug}/chuong-${chapterInt - 1}" title="Không có chương trước"
+								id="prev_chap" data-cid=""  onclick="updateSelectedOption(this)"><span
 								class="glyphicon glyphicon-chevron-left"></span> <span
 								class="hidden-xs">Chương </span>trước</a>
 							<button type="button"
@@ -181,8 +181,8 @@
 							</c:forEach>
 							</select>							
 							<a class="btn btn-success btn-chapter-nav"
-								href="/detail-story/${story.story_code }/${story.slug}/chuong-${chapterInt}"
-								title="Chương 2" id="next_chap" data-cid="4287420"><span
+								href="/detail-story/${story.story_code }/${story.slug}/chuong-${chapterInt + 1}"
+								title="Chương 2" id="next_chap" data-cid="" onclick = "updateSelectedOption(this)"><span
 								class="hidden-xs">Chương </span>tiếp <span
 								class="glyphicon glyphicon-chevron-right"></span></a>
 						</div>
@@ -203,8 +203,8 @@
 						<div class="btn-group"
 							style="margin-bottom: 15px; margin-top: 15px">
 							<a class="btn btn-success btn-chapter-nav"
-								href="javascript:void(0)" title="Không có chương trước"
-								id="prev_chap" data-cid=""><span
+								href="/detail-story/${story.story_code }/${story.slug}/chuong-${chapterInt - 1}" title="Không có chương trước"
+								id="prev_chap1" data-cid="" onclick = "updateSelectedOption(this)"><span
 								class="glyphicon glyphicon-chevron-left"></span> <span
 								class="hidden-xs">Chương </span>trước</a>
 							<button type="button"
@@ -213,12 +213,12 @@
 							</button>
 							<select id ="chapterSelect1" class=" btn btn-success btn-chapter-nav form-control chapter_jump" style="display: none;" >
 							<c:forEach var = "item" items = "${chapters }">
-							<option value =  "/detail-story/${story.story_code}/${story.slug}/${item.slug}">${item.chapter_name }</option>
+							<option value =  "/detail-story/${story.story_code}/${story.slug}/${item.slug}">${item.chapter_name}</option>
 							</c:forEach>
 							</select>
 							<a class="btn btn-success btn-chapter-nav"
 								href="/detail-story/${story.story_code }/${story.slug}/chuong-${chapterInt}"
-								title="Chương 2" id="next_chap" data-cid="4287420"><span
+								title="Chương 2" id="next_chap1" data-cid="" onclick = "updateSelectedOption(this)"><span
 								class="hidden-xs">Chương </span>tiếp <span
 								class="glyphicon glyphicon-chevron-right"></span></a>
 						</div>
@@ -232,8 +232,6 @@
 								<span class="glyphicon glyphicon-comment"></span> Bình luận
 							</button>
 						</div>
-						<div class="bg-info text-center visible-md visible-lg box-notice">Bạn
-							có thể dùng phím mũi tên hoặc WASD để lùi/sang chương.</div>
 						<div class="col-xs-12">
 							<div class="row" id="fb-comment-chapter"></div>
 						</div>
@@ -303,18 +301,6 @@
 					href="https://truyenfull.vn/the-loai/he-thong/"
 					title="truyện hệ thống">truyện hệ thống</a></li>
 			</ul>
-			<div class="col-xs-12 col-sm-12">
-				<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img
-					alt="Creative Commons License"
-					style="border-width: 0; margin-bottom: 10px"
-					src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />
-				<p>
-					Website hoạt động dưới Giấy phép truy cập mở <a rel="license"
-						href="http://creativecommons.org/licenses/by/4.0/">Creative
-						Commons Attribution 4.0 International License 
-				</p>
-				</a>
-			</div>
 		</div>
 	</div>
 	<script src="/assets/js/home.js"></script>
@@ -322,20 +308,26 @@
 <script>
 var chapterInt = ${chapterInt};
 var prevChap = document.getElementById('prev_chap');
+var prevChap1 = document.getElementById('prev_chap1');
 var nextChap = document.getElementById('next_chap');
-
-if (${chapterInt} > 2) {
+var nextChap1 = document.getElementById('next_chap1');
+if (${chapterInt} > 1) {
   prevChap.style.display = 'block';
+  prevChap1.style.display = 'block';
 } else {
   prevChap.style.display = 'none';
+  prevChap1.style.display = 'none';
 }
 
-if (${chapterInt} <= ${chapterIntBeforeAdd}) {
+if (${chapterInt} < ${chapterIntBeforeAdd}) {
   nextChap.style.display = 'block';
+  nextChap1.style.display = 'block';
 } else {
   nextChap.style.display = 'none';
+  nextChap1.style.display = 'none';
   
 }
+
 </script>
 </body>
 </html>

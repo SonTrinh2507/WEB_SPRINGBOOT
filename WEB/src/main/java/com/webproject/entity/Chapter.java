@@ -36,9 +36,6 @@ public class Chapter implements Serializable{
 	private Long chapter_id;
 	
 	@Column
-	private String chapter_code;
-	
-	@Column
 	private String chapter_name;
 	
 	@Column

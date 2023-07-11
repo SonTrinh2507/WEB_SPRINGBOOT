@@ -10,4 +10,9 @@ public interface ChapterService {
 	List<Chapter> getChapterNewUpdate(Long Story_id);
 	
 	Chapter contentChapter(Long story_id, String slug);
+	
+	int countChapter(Long story_id);
+
+	<S extends Chapter> S save(S entity);
+
 }

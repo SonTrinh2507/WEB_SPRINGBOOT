@@ -43,7 +43,7 @@
 		</div>
 		<div class="navbar-collapse collapse" itemscope
 			itemtype="https://schema.org/WebSite">
-			<meta itemprop="url" content="http://localhost:8888/home" />
+			<meta itemprop="url" content="/home" />
 			<ul class="control nav navbar-nav ">
 
 				<li class="dropdown"><a href="javascript:void(0)"
@@ -104,7 +104,7 @@
 				itemtype="https://schema.org/SearchAction">
 				<div class="input-group search-holder">
 					<meta itemprop="target"
-						content="https://truyenfull.vn/tim-kiem/?tukhoa={tukhoa}" />
+						content="" />
 					<input aria-label="Từ khóa tìm kiếm" role="search key"
 						class="form-control" id="search-input" type="search" name="tukhoa"
 						placeholder="Tìm kiếm..." value="" itemprop="query-input" required>
@@ -155,7 +155,7 @@
 								</h3>
 								<span class="label-title label-new"></span><span class="author"
 									itemprop="author"><span
-									class="glyphicon glyphicon-pencil"></span>${item.getAuthor().getAuthor_name() }</span>
+									class="glyphicon glyphicon-pencil"></span>${item.getAuthor_name() }</span>
 							</div>
 						</div>
 						<div class="col-xs-2 text-info">
@@ -336,28 +336,8 @@
 			</div>
 		</div>
 	</div>
-	<script>
-function sendParameters(start, end) {
-  var form = document.createElement("form");
-  form.setAttribute("method", "GET");
-  form.setAttribute("action", "/top-chapter");
+<script src="/assets/js/function.js"></script>
 
-  var startInput = document.createElement("input");
-  startInput.setAttribute("type", "hidden");
-  startInput.setAttribute("name", "start");
-  startInput.setAttribute("value", start);
-  form.appendChild(startInput);
-
-  var endInput = document.createElement("input");
-  endInput.setAttribute("type", "hidden");
-  endInput.setAttribute("name", "end");
-  endInput.setAttribute("value", end);
-  form.appendChild(endInput);
-
-  document.body.appendChild(form);
-  form.submit();
-}
-</script>
 	
 </body>
 </html>

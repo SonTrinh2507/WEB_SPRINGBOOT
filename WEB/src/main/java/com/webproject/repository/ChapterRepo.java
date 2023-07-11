@@ -19,5 +19,7 @@ public interface ChapterRepo extends JpaRepository<Chapter, Long>{
 	@Query(value = "SELECT * FROM chapter WHERE story_id = ?1 AND slug = ?2", nativeQuery = true)
 	Chapter contentChapter(Long story_id, String slug);
 	
+	@Query(value = "SELECT COUNT(*) FROM chapter WHERE story_id = ?", nativeQuery = true)
+	int countChapter(Long story_id);
 	
 }

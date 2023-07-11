@@ -6775,11 +6775,13 @@ div {
 	display: block !important
 }
 
-.list-side>.row>div div.s-title {
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	line-height: 20px
+.list-side > .row > div div.s-title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 33px;
+    font-size: 20px; /* Chữ to hơn */
+    font-style: italic; /* Chữ nghiêng */
 }
 
 .list-side h3
