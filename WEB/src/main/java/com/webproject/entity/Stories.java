@@ -52,8 +52,7 @@ public class Stories implements Serializable{
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column
 	private Date story_datepost;
-	
-	
+
 	@Column
 	private String story_describe;
 	
@@ -72,10 +71,13 @@ public class Stories implements Serializable{
 	@Column
 	private String author_name;
 	
-	@OneToMany(mappedBy = "stories", fetch = FetchType.LAZY)
+	@Column
+	private Integer total_rating;
+	
+	@OneToMany(mappedBy = "stories")
 	private List<Category_Story> category_story;
 	
-	@OneToMany(mappedBy = "stories", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "stories")
 	private List<Chapter> chapter;
 	
 }

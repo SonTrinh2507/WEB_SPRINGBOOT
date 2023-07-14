@@ -8,7 +8,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.microsoft.sqlserver.jdbc.StringUtils;
 import com.webproject.entity.Category_Story;
 import com.webproject.entity.Stories;
 import com.webproject.repository.StoriesRepo;
@@ -22,6 +21,11 @@ public class StoriesServiceImpl implements StoriesService {
 	@Override
 	public List<Stories> findAll() {
 		return storiesRepo.findAll();
+	}
+	
+	@Override
+	public Page<Stories> listStoryPage(Pageable page){
+		return storiesRepo.listStoryPage(page);
 	}
 
 	@Override
@@ -58,4 +62,15 @@ public class StoriesServiceImpl implements StoriesService {
 	public 	Page<Stories> listStoriesincomplete(Pageable pageable){
 		return storiesRepo.listStoriesincomplete(pageable);
 	}
+	
+	@Override
+	public void updateStoriesStatus(Long story_id) {
+		storiesRepo.updateStoriesStatus(story_id);
+	}
+	
+	@Override
+	public void deleteById(Long story_id) {
+		 storiesRepo.deleteById(story_id);
+	}
+
 }

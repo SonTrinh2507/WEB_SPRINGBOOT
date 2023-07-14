@@ -10,7 +10,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -65,21 +67,44 @@ public class AdminStoriesController {
 			}
 		}
 
-		return "redirect:/admin/story";
+		return "redirect:/admin/list-story";
 	}
 
-	@RequestMapping("list-story")
-	public String listAdminStory(ModelMap model, Pageable pageable) {
-		int pageSize = 6; // Số truyện hiển thị trên mỗi trang
-		pageable = PageRequest.of(pageable.getPageNumber(), pageSize);
-		Page<Stories> listStoriesIncomplete = storiesService.listStoriesincomplete(pageable);
-		int totalPages = listStoriesIncomplete.getTotalPages();
-		int currentPage = pageable.getPageNumber() + 1;
-		model.addAttribute("stories", listStoriesIncomplete.getContent());
-		model.addAttribute("totalPages", totalPages);
-		model.addAttribute("currentPage", currentPage);
-		model.addAttribute("countChapter",chapterService);
+	
+	
+	@GetMapping("list-story")
+	public String listAdminStory(ModelMap model,
+		      @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "6") int size) {
+		try {
+			 Pageable paging = PageRequest.of(page - 1, size);
+			 Page<Stories> listStoriesIncomplete = storiesService.listStoriesincomplete(paging) ;
+			 listStoriesIncomplete.getContent();
+			 int totalPages = listStoriesIncomplete.getTotalPages();
+				int currentPage = paging.getPageNumber() + 1;
+				model.addAttribute("stories", listStoriesIncomplete.getContent());
+				model.addAttribute("totalPages", totalPages);
+				model.addAttribute("currentPage", currentPage);
+				model.addAttribute("countChapter",chapterService);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		
 		return "admin/list-story";
+	}
+	
+	@PostMapping("delete/{story_id}")
+	public String deleteStory( @PathVariable("story_id") Long story_id) {
+	int result = category_storyService.deleteCategory_storyByStory_id(story_id);
+	int result1 = chapterService.deleteChapterByStory_id(story_id);
+		if(result != 0 && result1 != 0) {
+			storiesService.deleteById(story_id);
+			System.err.println("thành công");
+		}else {
+			System.err.println("thất bại");
+
+		}
+	    return "redirect:/admin/list-story";
 	}
 	
 
@@ -88,5 +113,12 @@ public class AdminStoriesController {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		return dateFormat.format(date);
 	}
+	
+	@GetMapping("/search")
+	public String search(@RequestParam("keyword") String keyword, ModelMap model) {
+        List<Stories> searchResults = storiesService.findByStoryNameContainingIgnoreCase(keyword);
+        model.addAttribute("stories", searchResults);
+        return "search-result";
+    }
 
 }

@@ -38,5 +38,15 @@ public class ChapterServiceImpl implements ChapterService {
 	public <S extends Chapter> S save(S entity) {
 		return chapterRepo.save(entity);
 	}
+	
+	@Override
+	public void deleteById(Long chapter_id) {
+		 chapterRepo.deleteById(chapter_id);
+	}
+	
+	@Override
+	public 	int deleteChapterByStory_id(Long story_id) {
+		return chapterRepo.deleteChapterByStory_id(story_id);
+	}
 
 }

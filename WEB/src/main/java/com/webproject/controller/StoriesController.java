@@ -1,6 +1,7 @@
 package com.webproject.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,6 +22,8 @@ import com.webproject.service.CategoryService;
 import com.webproject.service.Category_storyService;
 import com.webproject.service.ChapterService;
 import com.webproject.service.StoriesService;
+
+import javassist.NotFoundException;
 
 @Controller
 public class StoriesController {
@@ -41,8 +45,8 @@ public class StoriesController {
 		Stories stories = storiesService.findStoryByStory_code(story_code);
 		List<Chapter> chapters = chapterService.listChapterByStory_id(stories.getStory_id());
 		for(Category_Story ct : stories.getCategory_story()) {
-			Page<Category_Story> category_Stories = category_storyService.listStoriesByCategory_id(ct.getCategory_id(),null);
-			model.addAttribute("alikeCategory",category_Stories.getContent());
+			List<Category_Story> category_Stories = category_storyService.findByCategoryId(ct.getCategory_id());
+			model.addAttribute("alikeCategory",category_Stories);
 		}
 
 		model.addAttribute("story", stories);
@@ -83,11 +87,39 @@ public class StoriesController {
 
 	}
 	
+	@PostMapping("{story_id}/rate")
+	public String rateStory(@PathVariable("story_id") Long story_id, @RequestParam("rate") int rate) throws NotFoundException {
+		Optional<Stories> storyOptional  = storiesService.findByStory_id(story_id);
+		Stories story = storyOptional.orElseThrow(() -> new NotFoundException("Story not found"));
+		float avg = storyOptional.get().getAgv_star();
+		Integer total_rating = story.getTotal_rating();
+		if(total_rating == null) {
+				story.setTotal_rating(1);
+				story.setAgv_star(rate);
+				storiesService.save(story);
+			
+		}else {
+		float avg_total = ((avg*total_rating)+rate)/(total_rating +1);
+		float decimalPart = avg_total % 1; // Lấy phần thập phân của avgTotal
+		float roundedDecimal = Math.round(decimalPart * 10.0f) / 10.0f; // Làm tròn phần thập phân đến 1 chữ số sau dấu phẩy
+		
+		float result = (float) Math.floor(avg_total) + roundedDecimal; // Kết hợp phần nguyên và phần thập phân
+		story.setTotal_rating(total_rating+1);
+		story.setAgv_star(result);
+		storiesService.save(story);
+		}
+		String link = "redirect:/" + story.getStory_code() + "/" + story.getSlug();
+		return link;
+
+		
+		
+	}
 
 	@RequestMapping("list-stories/{slug}")
 	public String listStories(ModelMap model) {
 		return "list-stories";
 	}
+	
 	
 	@GetMapping("/search")
 	public String search(@RequestParam("keyword") String keyword, ModelMap model) {
@@ -97,6 +129,6 @@ public class StoriesController {
         model.addAttribute("stories", searchResults);
 		model.addAttribute("categories", categories);
 
-        return "search-result";
+        return "admin/list-story";
     }
 }

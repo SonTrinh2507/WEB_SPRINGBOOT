@@ -8,5 +8,4 @@ import com.webproject.entity.UserAdmin;
 @Repository
 public interface UserRepo extends JpaRepository<UserAdmin, String> {
 	UserAdmin findByUsername(String username);
-
 }

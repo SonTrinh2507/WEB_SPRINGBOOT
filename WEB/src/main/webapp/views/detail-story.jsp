@@ -130,7 +130,7 @@
 							itemtype="https://schema.org/ListItem">
 							<a
 							href="/detail-story/${story.story_code}/${story.slug}/${contentChapter.slug}"
-							title="Chương 1" itemprop="item"><span itemprop="name">${contentChapter.chapter_name}</span></a>
+							title="${contentChapter.chapter_name}" itemprop="item"><span itemprop="name">${contentChapter.chapter_name} : ${contentChapter.chapter_theme}</span></a>
 							<meta itemprop="position" content="3" /></li>
 					</ol>
 				</div>
@@ -152,7 +152,7 @@
 						<a class="chapter-title"
 							href="/detail-story/${story.story_code}/${story.slug}/${contentChapter.slug}"
 							title="${story.story_name } - ${contentChapter.chapter_name}"><span
-							class="chapter-text"><span>${contentChapter.chapter_name} </span></span></a>
+							class="chapter-text"><span>${contentChapter.chapter_name} : ${contentChapter.chapter_theme} </span></span></a>
 					</h2>
 					<c:set var="chapter" value="${contentChapter.slug}" />
 					<c:set var="fmchapter" value="${fn:substringAfter(chapter, '-')}" />
@@ -188,13 +188,13 @@
 						</div>
 					</div>									
 					<hr class="chapter-end">
-						<c:set var="str" value="${contentChapter.chapter_content}" />
-						<c:set var="formattedStr" value="${fn:replace(str, newLineChar, '<br/>')}" />
+						<c:set var="str" value="${contentChapter.chapter_content}" />					
+						<%-- <c:set var="formattedStr" value="${fn:replace(str, newLineChar, '<br/>')}" /> --%>
 					<div id="chapter-c" class="chapter-c" itemprop="articleBody">
 						<div class="visible-md visible-lg ads-responsive incontent-ad"
 							id="ads-chapter-pc-top" align="center" style="height: 90px">
 							</div>
-						${formattedStr }
+						${str}
 					</div>
 					<div id="ads-chapter-google-bottom" align="center"
 						style="margin-bottom: 10px; margin-top: 10px;"></div>

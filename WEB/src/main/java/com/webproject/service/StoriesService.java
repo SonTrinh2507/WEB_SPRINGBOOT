@@ -13,6 +13,8 @@ import com.webproject.entity.Stories;
 public interface StoriesService {
 	List<Stories> findAll();
 	
+	Page<Stories> listStoryPage(Pageable page);
+	
 	<S extends Stories> S save(S entity);
 	
 	Optional<Stories> findByStory_id(Long story_id);
@@ -27,5 +29,7 @@ public interface StoriesService {
 
 	Page<Stories> listStoriesincomplete(Pageable pageable);
 
-
+	void updateStoriesStatus(Long story_id);
+	
+void deleteById(Long story_id);
 }

@@ -13,7 +13,8 @@
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://unpkg.com/turndown/dist/turndown.js"></script>
 
 <!-- https://fonts.google.com/specimen/Roboto -->
@@ -29,14 +30,17 @@
 
 <body>
 	<div class="formbold-main-wrapper">
+	
 		<!-- Author: FormBold Team -->
 		<!-- Learn More: https://formbold.com -->
 		<div class="formbold-form-wrapper">
+			<a href = "/admin/list-chapter/${story.get().story_code }" ><i class="fa fa-arrow-circle-left fa-4x" aria-hidden="true"></i></a>
+		
 			<div class="formbold-form-title">
-				<h2 class="">Đăng tải truyện</h2>
+				<h2 class="">Đăng tải chương</h2>
 				<p>Nhập đầy đủ nội dung</p>
 			</div>
-
+	
 			<form method="post" action="/admin/editor" id="myForm">
 				<div>
 					<label for="story_name" class="formbold-form-label"> Tên
@@ -48,6 +52,10 @@
 						chương </label> <input type="text" name="chapter_name" id="chapter_name"
 						class="formbold-form-input" required oninput="generateStoryCode()" />
 				</div>
+				<div>
+					<label for="chapter_theme" class="formbold-form-label"> Chủ đề </label> <input type="text" name="chapter_theme" id="chapter_theme"
+						class="formbold-form-input" required />
+				</div>
 				<div></div>
 				<div class="formbold-input-flex">
 					<div>
@@ -55,7 +63,7 @@
 							type="text" name="slug" id="slug" class="formbold-form-input"
 							required />
 					</div>
-					<div></div>
+					
 				</div>
 
 				<label for="fileInput" class="btn btn-secondary"
@@ -73,6 +81,7 @@
 				</div>
 				    <input type="hidden" name="chapter_content" id="chapter_content">
 				   	<input type="hidden" name="story_id" id="chapter_content" value = "${story.get().story_id}">
+				    <input type="hidden" name="story_code" id="chapter_content" value = "${story.get().story_code}">
 				    
 				
 			</form>
@@ -186,20 +195,22 @@
   
   function generateStoryCode() {
 		var storyName = document.getElementById("chapter_name").value;
-		var storyCode = removeDiacritics(storyName).toLowerCase().replace(
+		var rpd = storyName.toLowerCase();
+		console.log(rpd);
+		var txt =  rpd.replace(/đ/g, "d");
+		var storyCode = removeDiacritics(txt).toLowerCase().replace(
 				/ /g, "-");
 		document.getElementById("slug").value = storyCode;
 	}
 
 	function removeDiacritics(str) {
-		return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+	    return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 	}
 		
 	function submitContent() {
 	    const chapterName = document.getElementById('chapter_name').value;
 	    const slug = document.getElementById('slug').value;
 	    const editorContent = editor.getData();
-
 	    document.getElementById('chapter_content').value = editorContent;
 	    document.getElementById('myForm').submit();
 	}

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.webproject.entity.Category;
 import com.webproject.entity.Category_Story;
@@ -33,15 +34,15 @@ public class CategoryController {
 	Category_storyService category_storyService;
 	
 	@RequestMapping("{category_id}/{slug}")
-	public String list(ModelMap model,@PathVariable("slug") String slug,@PathVariable("category_id") Long category_id,Pageable pageable) {
-		 int pageSize = 6; // Số truyện hiển thị trên mỗi trang
-		 pageable = PageRequest.of(pageable.getPageNumber(), pageSize);
-		 Page<Category_Story> storyPage = category_storyService.listStoriesByCategory_id(category_id,pageable);
-		 int totalPages = storyPage.getTotalPages();
-		 int currentPage = pageable.getPageNumber() + 1;
+	public String list(ModelMap model,@PathVariable("slug") String slug,@PathVariable("category_id") Long category_id,@RequestParam(value = "page", defaultValue = "1") int page,
+            @RequestParam(value = "size", defaultValue = "5") int size) {
+
+        PageRequest pageRequest = PageRequest.of(page - 1, size);
+
+		 Page<Category_Story> storyPage = category_storyService.findByCategoryIdPage(category_id,pageRequest);		
 		 model.addAttribute("stories", storyPage.getContent());
-		 model.addAttribute("totalPages", totalPages);
-		 model.addAttribute("currentPage", currentPage);
+		 model.addAttribute("totalPages",storyPage.getTotalPages() );
+		 model.addAttribute("currentPage", storyPage.getNumber() + 1);
 		//List<Category_Story> category_Stories = category_storyService.listStoriesByCategory_id(category_id);
 		List<Category> categories = categoryService.findAll();
 		//model.addAttribute("stories", category_Stories);

@@ -48,9 +48,12 @@ public class Chapter implements Serializable{
 	private Date date_update;
 	
 	@Column
+	private String chapter_theme;
+	
+	@Column
 	private Long story_id;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne
 	@JoinColumn(name = "story_id", insertable = false, updatable = false)
 	private Stories stories;
 	

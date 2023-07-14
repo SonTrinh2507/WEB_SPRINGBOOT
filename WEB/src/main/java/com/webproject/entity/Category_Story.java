@@ -42,11 +42,12 @@ public class Category_Story {
 
 	
 	@ManyToOne
-	@JoinColumn(name = "category_id",insertable = false, updatable = false)
+	@JoinColumn(name = "category_id")
+	@MapsId("category_id")
 	private Category category;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "story_id", insertable = false, updatable = false)
+	@ManyToOne
+	@JoinColumn(name = "story_id")
 	@MapsId("story_id")
 	private Stories stories;
 	

@@ -151,10 +151,6 @@
 			</div>
 		</div>
 		<div class="container" id="list-index">
-			<div class="row text-center">
-				<div id="banner-bio-link"></div>
-			</div>
-			<div class="hide" id="history-holder"></div>
 			<div
 				class="list list-truyen list-new col-xs-12 col-sm-12 col-md-8 col-truyen-main">
 				<div class="title-list">
@@ -167,7 +163,7 @@
 						class="glyphicon glyphicon-menu-right"></span></a>
 						
 				</div>
-				<c:forEach var = "item" items = "${stories }">
+				<c:forEach var = "item" items = "${storiesComplete }">
 				<div class="row" itemscope itemtype="https://schema.org/Book">
 					<div class="col-xs-9 col-sm-6 col-md-5 col-title">
 						<span class="glyphicon glyphicon-chevron-right"></span>

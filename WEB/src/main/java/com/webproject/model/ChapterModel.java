@@ -22,6 +22,4 @@ private Long story_id;
 	private String chapter_name;
 	private String slug;
 	private String chapter_content;
-	
-
 }

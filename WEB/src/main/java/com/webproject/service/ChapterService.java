@@ -14,5 +14,9 @@ public interface ChapterService {
 	int countChapter(Long story_id);
 
 	<S extends Chapter> S save(S entity);
+	
+	void deleteById(Long chapter_id);
+
+	int deleteChapterByStory_id(Long story_id);
 
 }

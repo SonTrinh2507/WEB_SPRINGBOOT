@@ -13,7 +13,9 @@
 	href="https://fonts.googleapis.com/css?family=Roboto:400,700" />
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-
+<script src=""></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://unpkg.com/turndown/dist/turndown.js"></script>
 
 <!-- https://fonts.google.com/specimen/Roboto -->
@@ -32,6 +34,8 @@
 		<!-- Author: FormBold Team -->
 		<!-- Learn More: https://formbold.com -->
 		<div class="formbold-form-wrapper">
+						<a href = "/admin/list-story" ><i class="fa fa-arrow-circle-left fa-4x" aria-hidden="true"></i></a>
+		
 			<div class="formbold-form-title">
 				<h2 class="">Đăng tải truyện</h2>
 				<p>Nhập đầy đủ nội dung</p>
@@ -92,15 +96,18 @@
 		</div>
 	</div>
 	<script>
-		function generateStoryCode() {
+	 function generateStoryCode() {
 			var storyName = document.getElementById("story_name").value;
-			var storyCode = removeDiacritics(storyName).toLowerCase().replace(
+			var rpd = storyName.toLowerCase();
+			console.log(rpd);
+			var txt =  rpd.replace(/đ/g, "d");
+			var storyCode = removeDiacritics(txt).toLowerCase().replace(
 					/ /g, "-");
 			document.getElementById("slug").value = storyCode;
 		}
 
 		function removeDiacritics(str) {
-			return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+		    return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 		}
 	</script>
 </body>
